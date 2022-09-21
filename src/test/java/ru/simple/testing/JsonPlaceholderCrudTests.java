@@ -3,10 +3,10 @@ package ru.simple.testing;
 import org.junit.jupiter.api.Test;
 import ru.simple.testing.dto.PostDto;
 import ru.simple.testing.steps.JsonPlaceholderApiSteps;
+import ru.simple.testing.testdata.ExpJsonPlaceholderData;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static ru.simple.testing.testdata.ExpJsonPlaceholderData.expPostDto;
 
 
 public class JsonPlaceholderCrudTests {
@@ -24,15 +24,17 @@ public class JsonPlaceholderCrudTests {
 
     @Test
     void getPostTest() {
+        PostDto expPostData = ExpJsonPlaceholderData.INSTANCE.getById(1);
+
         PostDto result = new JsonPlaceholderApiSteps().getPost(1);
 
-        assertThat(result.getUserId(), equalTo(expPostDto.getUserId()));
-        assertThat(result.getTitle(), equalTo(expPostDto.getTitle()));
-        assertThat(result.getBody(), equalTo(expPostDto.getBody()));
+        assertThat(result.getUserId(), equalTo(expPostData.getUserId()));
+        assertThat(result.getTitle(), equalTo(expPostData.getTitle()));
+        assertThat(result.getBody(), equalTo(expPostData.getBody()));
     }
 
     @Test
-    void getPostPageTest() {
+    void getPostListTest() {
         //TODO
     }
 
